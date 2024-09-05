@@ -1,22 +1,18 @@
 <template>
     <footer class="container">
         <div class="row text-center">
-            <div class="col-6">
-                <h1 class="text-white ms-4">Social</h1>
-                <ul>
+                <ul class="col-6">
+                    <h1 class="text-white ">Social</h1>
                     <li v-for="(social, index) in socials" :key="index" class="text-white">
                        <a href="#">{{ social }}</a> 
                     </li>
                 </ul>
-            </div>
-            <div class="col-6">
-                <h1 class="text-white ms-4">Contattaci</h1>
-                <ul>
+                <ul class="col-6">
+                    <h1 class="text-white ">Contattaci</h1>
                     <li v-for="(conatt, index) in conatti" :key="index" class="text-white">
                        <a href="#">{{ conatt }}</a> 
                     </li>
                 </ul>
-            </div>
         </div>
     </footer>
 </template>
