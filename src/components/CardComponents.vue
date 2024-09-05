@@ -2,13 +2,13 @@
     <div class="flip-card ">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img :src="image" alt="Avatar" style="width:300px;height:300px;">
+                <img :src="(image === 'https://image.tmdb.org/t/p/originalnull' ? '/public/images/NotFoundImg.png' : image)" alt="Avatar" style="width:300px;height:300px;">
             </div>
             <div class="flip-card-back">
                 <h5>{{ title }}</h5>
                 <p> {{ date}}</p>
-                <p> {{ vote }}</p>
-                <p> {{ lenguage }}</p>
+                <p> {{ getStar(vote)}}</p>
+                <p class=" m-auto my-1"> <img :src="`https://flagcdn.com/w20/${flagimg()}.png`" :alt="lenguage" class="flag"></p>
                 <p class="description"> {{ description }}</p>
             </div>
         </div>
@@ -33,11 +33,42 @@ export default {
             store,
 
         }
+        
+    },
+    methods: {
+        getStar(vote) {
+            // arrotondo per eccesso e divido il numero per 2 per usare una scala da 1 a 5
+            const star = Math.ceil(vote / 2)
+            return '⭐'.repeat(star)
+        },
+        flagimg(){
+                if(this.lenguage === 'en'){
+                    return 'gb'
+                }else if(this.lenguage === 'ja'){
+                    return 'jp'
+                }else if(this.lenguage === 'ko'){
+                    return 'kr'
+                }else if(this.lenguage === 'el'){
+                    return 'gr'
+                }else if(this.lenguage === 'zh'){
+                    return 'cn'
+                }else if(this.lenguage === 'hi'){
+                    return 'in'
+                }else if(this.lenguage === 'cs'){
+                    return 'cz'
+                }else{
+                    return this.lenguage
+                }
+            }  
     }
 }
 </script>
 
 <style lang="scss" scoped>
+ .flag{
+        width: 40px;
+        height: 25px;
+    }
 .description{
     overflow: hidden;
     text-overflow: ellipsis;

@@ -29,9 +29,6 @@ export default {
 
     }
   },
-  mounted() {
-
-  },
   methods: {
     getMovie() {
       axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}`)
