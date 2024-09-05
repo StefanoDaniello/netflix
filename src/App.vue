@@ -2,16 +2,19 @@
   <div class="app-container">
     <HeaderComponents @search="getMovie()"/>
     <div class="content">
-      <MainComponents />
+      <LoaderComponets />
+      <MainComponents @newpage="getMovie()"/>
     </div>
     <FooterComponents />
   </div>
+ 
 </template>
 
 <script>
 import HeaderComponents from './components/HeaderComponents.vue';
 import MainComponents from './components/MainComponents.vue';
 import FooterComponents from './components/FooterComponents.vue';
+import LoaderComponets from './components/LoaderComponents.vue';
 import { store } from './store.js';
 import axios from 'axios';
 
@@ -22,6 +25,7 @@ export default {
     HeaderComponents,
     MainComponents,
     FooterComponents,
+    LoaderComponets
   },
   data() {
     return {
@@ -30,15 +34,23 @@ export default {
     }
   },
   methods: {
-    
     getMovie() {
-      axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}`)
+      axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}&language=${this.store.language}&page=${this.store.page}`)
         .then((response) => {
+          this.store.loading = true;
           this.store.data.movies = response.data.results;
-          console.log(this.store.data.movies);
+          this.store.totalPages = response.data.total_pages;
+          this.store.totalResults = response.data.total_results;
+          console.log(response.data);
         })
         .catch((error) => {
           console.error(error)
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.store.loading = false;
+          }, 150);
+          
         })
     }
   },
