@@ -1,15 +1,16 @@
 <template>
   <div class="app-container">
-    <HeaderComponents />
+    <HeaderComponents @search="getMovie()"/>
     <div class="content">
-
+      <MainComponents />
     </div>
     <FooterComponents />
   </div>
 </template>
 
 <script>
-import HeaderComponents from './components/HeaderComponents.vue'; 
+import HeaderComponents from './components/HeaderComponents.vue';
+import MainComponents from './components/MainComponents.vue';
 import FooterComponents from './components/FooterComponents.vue';
 import { store } from './store.js';
 import axios from 'axios';
@@ -19,6 +20,7 @@ export default {
   name: 'App',
   components: {
     HeaderComponents,
+    MainComponents,
     FooterComponents,
   },
   data() {
@@ -28,18 +30,18 @@ export default {
     }
   },
   mounted() {
-    this.getMovie();
+
   },
   methods: {
     getMovie() {
-      axios.get('https://api.themoviedb.org/3/search/movie?api_key=c2623eb63df32c9f32b41797b4f2efe5&query=avengers&language=it-IT&page=1')
-      .then((response) => {
-        this.store.movies = response.data.results;
-        console.log(this.store.movies)
-      })
-      .finally({
-        
-      })
+      axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}`)
+        .then((response) => {
+          this.store.data.movies = response.data.results;
+          console.log(this.store.data.movies)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   },
 }
@@ -54,11 +56,10 @@ export default {
 }
 
 .content {
-  flex: 1; 
+  flex: 1;
 }
 
 footer {
-  margin-top: auto; 
+  margin-top: auto;
 }
 </style>
-
