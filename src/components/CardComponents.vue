@@ -2,10 +2,10 @@
     <div class="flip-card ">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img :src="(image === 'https://image.tmdb.org/t/p/originalnull' ? '/public/images/NotFoundImg.png' : image)" alt="Avatar" style="width:300px;height:300px;">
+                <img :src="(image === 'https://image.tmdb.org/t/p/originalnull' ? '/public/images/NotFoundImg.png' : image)" alt="Avatar" class="w-100 h-100">
             </div>
             <div class="flip-card-back">
-                <h5>{{ title }}</h5>
+                <h5 class="mt-4">{{ title }}</h5>
                 <p> {{ date}}</p>
                 <p> {{ getStar(vote)}}</p>
                 <p class=" m-auto my-1"> <img :src="`https://flagcdn.com/w20/${flagimg()}.png`" :alt="lenguage" class="flag"></p>
@@ -31,7 +31,6 @@ export default {
     data(){
         return{
             store,
-
         }
         
     },
@@ -66,20 +65,20 @@ export default {
 
 <style lang="scss" scoped>
  .flag{
-        width: 40px;
-        height: 25px;
-    }
+    width: 40px;
+    height: 25px;
+}
 .description{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 }
 .flip-card {
     background-color: transparent;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     perspective: 1000px;
     border-radius: 10px;
     overflow: hidden;

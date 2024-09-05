@@ -30,11 +30,12 @@ export default {
     }
   },
   methods: {
+    
     getMovie() {
       axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}`)
         .then((response) => {
           this.store.data.movies = response.data.results;
-          console.log(this.store.data.movies)
+          console.log(this.store.data.movies);
         })
         .catch((error) => {
           console.error(error)

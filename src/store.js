@@ -9,5 +9,4 @@ export const store = reactive({
     data:{
         movies:[],
     },
-   
 })
