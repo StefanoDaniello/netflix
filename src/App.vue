@@ -1,9 +1,10 @@
 <template>
   <div class="app-container">
-    <HeaderComponents @search="getMovie()"/>
+    <HeaderComponents @search="getMovie" :prezzo="prezzo" :sconto="sconto" />
     <div class="content">
       <LoaderComponets />
-      <MainComponents @newpage="getMovie()"/>
+      <!-- non utilizzando le () le funzione viene chiamata dall'emit mentre utilizzandole viene chiamata direttamente quando il componente viene montato -->
+      <MainComponents @newpage="getMovie"/>
     </div>
     <FooterComponents />
   </div>
@@ -30,11 +31,19 @@ export default {
   data() {
     return {
       store,
-
+      prezzo: 100,
+      sconto: 20
     }
   },
+  mounted() {
+    this.refreshprezzosconto();
+  },
   methods: {
-    getMovie() {
+    getMovie(data) {
+      if (data) {
+        // data dall'emit di MainComponents in App.vue
+        console.log('Data received:', data); 
+      }
       axios.get(`${this.store.apiUrl}search/movie?api_key=${store.api_key}&query=${this.store.search}&language=${this.store.language}&page=${this.store.page}`)
         .then((response) => {
           this.store.loading = true;
@@ -52,6 +61,13 @@ export default {
           }, 150);
           
         })
+    },
+    refreshprezzosconto(){
+      setInterval(() => {
+        this.prezzo ++;
+        // this.sconto++;
+      }, 1000);
+      
     }
   },
 }

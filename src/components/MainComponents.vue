@@ -60,13 +60,15 @@ export default {
         nextPage() {
             if (this.store.page < this.store.totalPages) {
                 this.store.page++;
-                this.$emit('newpage');
+                const data = 'ciao sono un dato +';
+                this.$emit('newpage' , data);
             }
         },
         prevPage() {
             if (this.store.page > 1) {
                 this.store.page--;
-                this.$emit('newpage');
+                const data = 'ciao sono un dato -';
+                this.$emit('newpage' , data);
             }
         },
     }

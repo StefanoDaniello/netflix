@@ -1,7 +1,9 @@
 <template>
   <header class="py-3">
     <div class="container d-flex justify-content-between">
-        <h1 class="text-secondary none">Netflix</h1>
+        <h1 class="text-secondary none">Netflix
+            <span class="text-danger">{{ prezzoScontato }}</span>
+        </h1>
         <div class="d-flex align-items-center w100">
             <input type="text" placeholder="Cerca" class="form-control me-2" v-model="store.search">
             <button class="btn btn-danger " @click="$emit('search')">Cerca</button>
@@ -14,11 +16,22 @@
 import {store} from '../store.js';
     export default {
         name:"HeaderComponents",
+        props:{
+            prezzo: Number,
+            sconto: Number
+        },
         data(){
             return{
                 store,
             }
         },
+        computed:{
+            // Calcola dinamicamente il prezzo scontato in base ai valori passati dal genitore
+            prezzoScontato(){
+                //  il prezzo origiale - sconto ricevuto sul prezzo
+                return this.prezzo - (this.prezzo * this.sconto / 100);
+            }
+        }
     }
 </script>
 

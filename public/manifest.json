@@ -1,0 +1,22 @@
+{
+    "name": "Netflix App",
+    "short_name": "Netflix",
+    "description": "Guarda i tuoi film",
+    "theme_color": "#22afd6",
+    "background_color": "#F5F5F5",
+    "start_url": "/",
+    "display": "fullscreen",
+    "scope": "/",
+    "icons": [
+    {
+    "src": "img/icons/vue.js-logo.png",
+    "sizes": "360x360",
+    "type": "image/png"
+    },
+    {
+    "src": "img/icons/vue.js-logo.png",
+    "sizes": "360x360",
+    "type": "image/png"
+    }
+    ]
+}
